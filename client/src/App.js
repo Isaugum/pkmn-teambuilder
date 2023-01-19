@@ -5,6 +5,7 @@ import {
   DisplayPokemon,
   DisplaySingle,
   InputSingle,
+  LoginForm
 } from "./components";
 
 function App() {
@@ -44,6 +45,8 @@ function App() {
 
   return (
     <div className="main-screen">
+      < LoginForm />
+      {/*
       {displaySingle === false ? (
         <>
           <InputForm getData={getSearchData} />
@@ -52,6 +55,7 @@ function App() {
       ) : (
         <DisplaySingle goBack={backButton} mon={clickedMon} capitalize={capitalize} InputSingle={InputSingle} />
       )}
+      */}
     </div>
   );
 }
