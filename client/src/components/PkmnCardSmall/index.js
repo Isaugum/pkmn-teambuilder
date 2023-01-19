@@ -1,0 +1,1 @@
+export { PkmnCardSmall } from './PkmnCardSmall';

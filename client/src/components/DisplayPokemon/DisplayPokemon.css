@@ -1,0 +1,178 @@
+.display-mons {
+    display: grid;
+    justify-content: space-around;
+    align-items: center;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 50px;
+    row-gap: 50px;
+
+    padding: 100px 170px;
+}
+
+.mon-card {
+    display: grid;
+    justify-content: space-around;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 2fr 1fr;
+
+    width: 500px;
+    height: 350px;
+
+    padding: 30px;
+
+    border-radius: 10px;
+
+    background:rgb(127, 127, 249);
+
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+
+    transition: 0.5s;
+}
+
+.mon-itself {
+    grid-row-start: 1;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin-top: 10px;
+}
+
+.mon-name {
+    margin-top: 30px;
+
+    font-size: 20px;
+    font-style: none;
+}
+
+.mon-name:after {
+    content: "";
+    width: 100%;
+    height: 1px;
+    margin: 3px;
+    display: block;
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+.mon-image {
+    height: 100px;
+
+    padding: 15px;
+
+    background: rgba(128, 128, 128, 0.3);
+
+    border-radius: 80px;
+
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.mon-typing {
+    grid-row-start: 1;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.mon-type-instance {
+    width: 60px;
+
+    margin: 5px 0;
+    padding: 10px;
+
+    text-align: center;
+
+    background-color :rgba(0, 0, 0, 0.1);
+
+    border-radius: 10px;
+
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+.mon-abilities {
+    grid-row-start: 1;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.mon-ability-instance {
+    width: 100px;
+
+    margin: 5px 0;
+    padding: 10px;
+
+    text-align: center;
+
+    background-color :rgba(0, 0, 0, 0.1);
+
+    border-radius: 10px;
+
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+.mon-card:hover {
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
+
+.mon-stats {
+    grid-row-start: 2;
+    grid-column-start: 1;
+    grid-column-end: 4;
+
+    text-align: center;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    
+    padding: 20px;
+
+    background-color: rgba(0, 0, 0, 0.1);
+
+    border-radius: 10px;
+}
+
+.mon-stat-instance {
+    margin: 0 10px;
+}
+
+
+@media screen and (max-width: 600px) {
+    .display-mons {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .mon-card {
+        width: 380px;
+    }
+
+    .mon-name {
+        font-size: 15px;
+        font-weight: bold;
+    }
+
+    .mon-type-instance {
+        font-size: 14px;
+    }
+    .mon-ability-instance {
+        font-size: 14px;
+    }
+
+    .mon-stat-instance {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .display-mons {
+        display: flex;
+        flex-direction: column;
+    }
+}
