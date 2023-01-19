@@ -1,7 +1,6 @@
 console.log("Starting...");
 const express = require("express");
 require("dotenv").config();
-
 const searchRouter = require('./routes/search.js');
 
 const app = express();

@@ -1,10 +1,6 @@
 const express = require("express");
-const Datastore = require("nedb");
-
+const database = require("../loadDatabase");	
 let router = express.Router();
-
-const database = new Datastore("./database/pokemonDB.db");
-database.loadDatabase();
 
 router.get("/", (req, res) => {
 
