@@ -23,7 +23,7 @@ const LoginForm = () => {
       },
       body: JSON.stringify(user)
     }).then(response => response.json());
-
+    
     JSON.stringify(isLoginValid);
     setUserSession(isLoginValid);
   }
