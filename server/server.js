@@ -11,6 +11,7 @@ const port = process.env.PORT;
 app.use("/search", searchRouter);
 app.use("/login", loginRouter);
 
+//SERVER
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
