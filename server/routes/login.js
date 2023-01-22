@@ -18,6 +18,10 @@ router.post("/", jsonParser, (req, res) => {
         }
             
         if(result.rows.length > 0) {
+            if(result.rows[0].username === "" || result.rows[0].password === "") {
+                res.send({message: "Invalid username or password!", value: false});
+            }
+
             res.send({ user: result.rows[0], value: true });
         } else {
             res.send({message: "Invalid username or password!", value: false});
