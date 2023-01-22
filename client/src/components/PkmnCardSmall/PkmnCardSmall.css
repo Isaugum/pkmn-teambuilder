@@ -1,0 +1,40 @@
+.mon-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 80px;
+    height: 80px;
+
+    padding: 30px;
+    margin: 10px;
+
+    background-color: rgba(156, 156, 251, 0.3);
+    border-radius: 30px;
+}
+
+.mon-card:hover {
+    height: 110px;
+}
+
+.mon-card>p {
+    margin: 0;
+    padding: 0;
+
+    text-align: center;
+}
+
+.mon-itself>img {
+    height: 80px;
+}
+
+.mon-typing>h5 {
+    display: none;
+}
+
+.mon-typing,
+.mon-abilities,
+.mon-stats {
+    display: none;
+}

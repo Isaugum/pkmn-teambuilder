@@ -1,4 +1,4 @@
-
+import './PkmnCardSmall.css';
 
 const PkmnCardSmall = (props) => {
 
@@ -10,8 +10,9 @@ const PkmnCardSmall = (props) => {
             
             <div className="mon-itself">
               <img className="mon-image" src={props.mon.spriteFront} />
-              <p className="mon-name">{`#${props.mon.id} - ${props.capitalize(props.mon.name)}`}</p>
             </div>
+
+            <p className="mon-name">{`#${props.mon.id} - ${props.capitalize(props.mon.name)}`}</p>
 
             <div className="mon-typing">
               <h5>TYPES</h5>

@@ -67,14 +67,15 @@ const LoginForm = () => {
             placeholder="Password"
             onChange={e => setPassword(e.target.value)}
           />
-      </div>
 
       <button className="submit-btn" onClick={handleLogin}>
         Login
       </button>
+
       <button className="submit-btn" onClick={handleRegister}>
         Register
       </button>
+      </div>
     </>
   );
 };

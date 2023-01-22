@@ -1,4 +1,4 @@
-import "./app.css";
+import "./styles/app.css";
 import { useState, createContext } from "react";
 import {
   InputForm,

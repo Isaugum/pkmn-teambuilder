@@ -69,7 +69,7 @@ const InputForm = ({ getData }) => {
 
   return (
     <>
-      <div className="inputs-group">
+      <div className="inputs-group-form">
         <div className="inputs">
           <h5>TYPES</h5>
           <input
@@ -127,11 +127,11 @@ const InputForm = ({ getData }) => {
             onChange={handleChange}
           />
         </div>
-      </div>
 
-      <button className="submit-btn" onClick={handleSubmit}>
-        SEARCH
-      </button>
+        <button className="submit-btn" onClick={handleSubmit}>
+          SEARCH
+        </button>
+      </div>
     </>
   );
 };

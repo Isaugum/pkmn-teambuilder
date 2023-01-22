@@ -1,0 +1,27 @@
+.inputs-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    height: 100vh;
+    width: 300px;
+}
+
+.inputs-group-form h5 {
+    margin: 20px 0;
+}
+
+.inputs-group-form input {
+    width: 97%;
+    height: 30px;
+
+    margin-bottom: 5px;
+}
+
+.submit-btn-form {
+    width: 100%;
+    height: 40px;
+
+    margin-top: 40px;
+}
