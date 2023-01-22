@@ -1,5 +1,5 @@
 const express = require("express");
-const database = require("../loadDatabase");	
+const { database } = require("../loadDatabase");	
 let router = express.Router();
 
 router.get("/", (req, res) => {
