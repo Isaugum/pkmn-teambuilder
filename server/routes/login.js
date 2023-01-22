@@ -1,47 +1,28 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const { json } = require("express");
 let router = express.Router();
+const { db } = require("../loadDatabase");
 
 const jsonParser = bodyParser.json();
 
-const { Client } = require("pg")
-
-const connectDb = async (username, password) => {
-    try {
-        const client = new Client({
-            user: process.env.PGUSER,
-            host: process.env.PGHOST,
-            database: process.env.PGDATABASE,
-            password: process.env.PGPASSWORD,
-            port: process.env.PGPORT
-        })
-
-        await client.connect();
-        console.log("client connected");
-
-        await client.query(`SELECT * FROM users WHERE username = $1`, [username])
-        .then(res => {
-            console.log(res.rows[0]);
-        });
-
-        await client.end();
-
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-
 router.post("/", jsonParser, (req, res) => {
+    console.log(req.body);
     let username = req.body.username;
     let password = req.body.password;
 
-    console.log(req.body);
-
-    connectDb(username, password);
-
-    res.send(true);
-});    
+    db.query(`SELECT * FROM users WHERE username = $1 and password = $2`, [username, password],
+    (err, result) => {
+        if(err) {
+            console.log(err);
+            res.send({err: err});
+        }
+            
+        if(result.rows.length > 0) {
+            res.send({ user: result.rows[0], value: true });
+        } else {
+            res.send({message: "Invalid username or password!", value: false});
+        }
+    });
+});
 
 module.exports = router;

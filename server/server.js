@@ -1,5 +1,6 @@
 console.log("Starting...");
 const express = require("express");
+const { db, initializeDatabase } = require("./loadDatabase");
 require("dotenv").config();
 
 const searchRouter = require('./routes/search.js');
@@ -16,5 +17,6 @@ app.use("/register", registerRouter);
 
 //SERVER
 app.listen(port, () => {
+  initializeDatabase();
   console.log(`Server listening on port ${port}`);
 });

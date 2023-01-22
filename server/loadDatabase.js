@@ -2,31 +2,30 @@ const { Client } = require("pg")
 const dotenv = require("dotenv")
 dotenv.config()
 
-/*const connectDb = async () => {
-    try {
-        const client = new Client({
-            user: process.env.PGUSER,
-            host: process.env.PGHOST,
-            database: process.env.PGDATABASE,
-            password: process.env.PGPASSWORD,
-            port: process.env.PGPORT
-        })
+const db = new Client({
+    user: process.env.PGUSER,
+    host: process.env.PGHOST,
+    database: process.env.PGDATABASE,
+    password: process.env.PGPASSWORD,
+    port: process.env.PGPORT
+})
 
-        await client.connect();
-        console.log("client connected");
+const initializeDatabase = () => {
+    db.connect();
 
-    } catch (error) {
-        console.log(error);
-    }
+    db.query(`
+    CREATE TABLE IF NOT EXISTS "users" (
+        "id" SERIAL,
+        "username" VARCHAR(20) NOT NULL,
+        "password" VARCHAR(20) NOT NULL,
+        PRIMARY KEY ("id")
+    );`)
 }
-
-connectDb();*/
 
 
 const Datastore = require("nedb");
 
-
 const database = new Datastore("./database/pokemonDB.db");
 database.loadDatabase();
 
-module.exports = { database };
+module.exports = { database, db, initializeDatabase };
