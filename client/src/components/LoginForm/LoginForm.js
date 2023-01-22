@@ -15,7 +15,7 @@ const LoginForm = () => {
       password: password
     }
 
-    const isLoginValid = await fetch(`/login`, {
+    await fetch(`/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -23,11 +23,12 @@ const LoginForm = () => {
       },
       body: JSON.stringify(user)
     }).then(response => response.json())
-    .then(res => console.log(res));
+    .then(res => {
+      console.log(res);
 
-    JSON.stringify(isLoginValid);
-    
-    setUserSession(isLoginValid);
+      JSON.stringify(res);
+      setUserSession(res.value);
+    });
   }
 
   const handleRegister = async () => {
