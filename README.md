@@ -5,9 +5,7 @@ Hello! This is an app meant as a helping tool for competitive pokemon teambuildi
 So far, it only allows to search by a combination of types/abilities/moveset - but also modifying and exporting pokemon.
 
 TO DO:
-- NODEJS REGISTER ROUTE; DO NOT INSERT IF USERNAME EXISTS!!!!!
 - Implement server-side WAF
-- login authentication
 
 - change search queries so that data is send in body not query
 - allow users to save pokemon/build and save teams
