@@ -2,10 +2,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const { json } = require("express");
 let router = express.Router();
-
-const jsonParser = bodyParser.json();
-
 const { Client } = require("pg")
+const jsonParser = bodyParser.json();
 
 const connectDb = async (username, password) => {
     try {
@@ -20,10 +18,15 @@ const connectDb = async (username, password) => {
         await client.connect();
         console.log("client connected");
 
-        await client.query(`SELECT * FROM users WHERE username = $1`, [username])
-        .then(res => {
-            console.log(res.rows[0]);
-        });
+        await client.query(`
+        CREATE TABLE IF NOT EXISTS "users" (
+            "id" SERIAL,
+            "username" VARCHAR(20) NOT NULL,
+            "password" VARCHAR(20) NOT NULL,
+            PRIMARY KEY ("id")
+        );`)
+
+        await client.query(`INSERT INTO users (username, password) VALUES ($1, $2);`, [username, password]);
 
         await client.end();
 
@@ -32,7 +35,6 @@ const connectDb = async (username, password) => {
     }
 }
 
-
 router.post("/", jsonParser, (req, res) => {
     let username = req.body.username;
     let password = req.body.password;
@@ -40,8 +42,6 @@ router.post("/", jsonParser, (req, res) => {
     console.log(req.body);
 
     connectDb(username, password);
-
-    res.send(true);
 });    
 
 module.exports = router;

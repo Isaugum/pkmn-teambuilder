@@ -15,7 +15,7 @@ function App() {
   const [displaySingle, setDisplaySingle] = useState(false);
   const [clickedMon, setMon] = useState([]);
   const [scrollPosition, setScrollPosition] = useState(0);
-  const [userSession, setUserSession] = useState(null);
+  const [userSession, setUserSession] = useState(false);
 
   const getSearchData = (result) => {
     setDisplayValues(result);
@@ -50,7 +50,7 @@ function App() {
     <div className="main-screen">
       <LoginContext.Provider value={{userSession, setUserSession}}>
       {
-        userSession === null ? < LoginForm /> :
+        userSession === false ? < LoginForm /> :
         <>{displaySingle === false ?
           <>
             <InputForm getData={getSearchData} />

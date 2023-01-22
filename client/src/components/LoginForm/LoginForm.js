@@ -22,16 +22,33 @@ const LoginForm = () => {
         Accept: "application/json",
       },
       body: JSON.stringify(user)
-    }).then(response => response.json());
-    
+    }).then(response => response.json())
+    .then(res => console.log(res));
+
     JSON.stringify(isLoginValid);
+    
     setUserSession(isLoginValid);
   }
 
-  const handleChange = (e) => {
+  const handleRegister = async () => {
+    const user = {
+      username: username,
+      password: password
+    }
 
-  };
+    const registerAuth = await fetch(`/register`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(user)
+    }).then(response => response.json());
+
+    console.log(registerAuth);
   
+  }
+
   return (
     <>
       <div className="inputs-group">
@@ -54,7 +71,7 @@ const LoginForm = () => {
       <button className="submit-btn" onClick={handleLogin}>
         Login
       </button>
-      <button className="submit-btn" onClick={console.log("hey")}>
+      <button className="submit-btn" onClick={handleRegister}>
         Register
       </button>
     </>
