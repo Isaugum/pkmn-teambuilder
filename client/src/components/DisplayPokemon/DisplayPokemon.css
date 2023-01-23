@@ -3,7 +3,14 @@
     justify-content: center;
     align-items: center;
 
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
 
     margin-top: 50px;
+}
+
+@media only screen and (min-width: 600px) {
+    .display-mons {
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        margin-top: 100px;
+    }
 }
