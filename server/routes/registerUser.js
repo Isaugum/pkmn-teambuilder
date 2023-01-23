@@ -10,6 +10,8 @@ router.post("/", jsonParser, (req, res) => {
     let username = req.body.username;
     let password = req.body.password;
 
+    console.log(req.body);
+
     db.query(`SELECT * FROM users WHERE username = $1`, [username],
     (err, result) => {
         if(err) {

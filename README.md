@@ -6,6 +6,7 @@ So far, it only allows to search by a combination of types/abilities/moveset - b
 
 TO DO:
 - Implement server-side WAF
+- React routing
 
 - change search queries so that data is send in body not query
 - allow users to save pokemon/build and save teams

@@ -6,6 +6,8 @@ const LoginForm = () => {
 
   const [username, setUsername ] = useState("");
   const [password, setPassword ] = useState("");
+  const [loginMessage, setLoginMessage] = useState("");
+  const [ registerMessage, setRegisterMessage] = useState("");
 
   const { setUserSession } = useContext(LoginContext);
 
@@ -24,10 +26,13 @@ const LoginForm = () => {
       body: JSON.stringify(user)
     }).then(response => response.json())
     .then(res => {
-      console.log(res);
 
       JSON.stringify(res);
       setUserSession(res.value);
+
+      if(res.value === false) {
+        setLoginMessage(res.message);
+      }
     });
   }
 
@@ -37,16 +42,18 @@ const LoginForm = () => {
       password: password
     }
 
-    const registerAuth = await fetch(`/register`, {
+    await fetch(`/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
       body: JSON.stringify(user)
-    }).then(response => response.json());
-
-    console.log(registerAuth);
+    }).then(res => res.json())
+    .then(res => {
+      JSON.stringify(res);
+      alert(res.message);
+    });
   
   }
 
@@ -75,6 +82,8 @@ const LoginForm = () => {
       <button className="submit-btn" onClick={handleRegister}>
         Register
       </button>
+
+      <h4 className="login-msg">{loginMessage}</h4>
       </div>
     </>
   );

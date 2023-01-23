@@ -21,3 +21,9 @@
 
     margin-top: 10px;
 }
+
+.login-msg {
+    margin-top: 50px;
+
+    color: rgb(111, 0, 0);
+}
