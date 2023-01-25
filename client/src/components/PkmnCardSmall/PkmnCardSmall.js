@@ -6,7 +6,8 @@ const PkmnCardSmall = (props) => {
 
         <div className="mon-card" key={props.mon.id}
             onClick={() => {
-              props.clickedMon(props.mon);}}>
+              props.clickedMon(props.mon);
+            }}>
             
             <div className="mon-itself">
               <img className="mon-image" src={props.mon.spriteFront} />

@@ -2,12 +2,9 @@ import "./styles/app.css";
 import { useState, createContext, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import {
-  DisplaySingle,
-  InputSingle
-} from "./components";
-import {
   MainMenu,
-  LoginForm
+  LoginForm,
+  DisplaySingle
 } from "./pages";
 
 export const LoginContext = createContext(null);
@@ -67,6 +64,12 @@ function App() {
   return (
     <div className="main-screen">
       <LoginContext.Provider value={{userSession, setUserSession}}>
+      {/*
+      <Routes>
+        <Route path="/" element={!userSession ? <LoginForm /> : <MainMenu getData={getSearchData} data={displayValues} clickedMon={focusedMon} capitalize={capitalize}/>} />
+        <Route path="/single" element={<DisplaySingle goBack={backButton} mon={clickedMon} capitalize={capitalize} />} />
+      </Routes>
+      */}
       {
         userSession === false ? < LoginForm /> :
         <>{displaySingle === false ?
@@ -74,7 +77,7 @@ function App() {
             <MainMenu getData={getSearchData} data={displayValues} clickedMon={focusedMon} capitalize={capitalize}/>
           </>
          : 
-          <DisplaySingle goBack={backButton} mon={clickedMon} capitalize={capitalize} InputSingle={InputSingle} />
+          <DisplaySingle goBack={backButton} mon={clickedMon} capitalize={capitalize} />
         }</>
       }
       </LoginContext.Provider>      

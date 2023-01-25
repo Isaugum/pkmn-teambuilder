@@ -1,11 +1,12 @@
 import "./DisplaySingle.css";
+import { InputSingle } from "../../components";
 import backButton from "./icons/back.png";
 import shinyButton from "./icons/shiny.png";
 import saveButton from "./icons/save.png";
 
 import { useState, useEffect } from "react";
 
-const DisplaySingle = ({ goBack, mon, capitalize, InputSingle }) => {
+const DisplaySingle = ({ goBack, mon, capitalize}) => {
   const [shinyMode, setShinyMode] = useState(false);
   const [frontImage, setFrontImage] = useState(mon.spriteFront);
   const [backImage, setBackImage] = useState(mon.spriteBack);
