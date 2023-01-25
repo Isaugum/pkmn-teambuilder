@@ -1,12 +1,14 @@
 import "./styles/app.css";
-import { useState, createContext } from "react";
+import { useState, createContext, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
 import {
-  InputForm,
-  DisplayPokemon,
   DisplaySingle,
-  InputSingle,
-  LoginForm
+  InputSingle
 } from "./components";
+import {
+  MainMenu,
+  LoginForm
+} from "./pages";
 
 export const LoginContext = createContext(null);
 
@@ -45,6 +47,22 @@ function App() {
       return data;
     }
   };
+
+  useEffect(() => {
+    fetch(`/login`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      }
+    }).then(response => response.json())
+    .then(response => {
+      JSON.stringify(response);
+      console.log(response);
+
+      setUserSession(response.value);
+    })
+  }, []);
   
   return (
     <div className="main-screen">
@@ -53,8 +71,7 @@ function App() {
         userSession === false ? < LoginForm /> :
         <>{displaySingle === false ?
           <>
-            <InputForm getData={getSearchData} />
-            <DisplayPokemon data={displayValues} clickedMon={focusedMon} capitalize={capitalize} />
+            <MainMenu getData={getSearchData} data={displayValues} clickedMon={focusedMon} capitalize={capitalize}/>
           </>
          : 
           <DisplaySingle goBack={backButton} mon={clickedMon} capitalize={capitalize} InputSingle={InputSingle} />

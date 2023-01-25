@@ -2,8 +2,12 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const { db } = require("../loadDatabase");
 const { json } = require("express");
-let router = express.Router();
 
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
+
+
+let router = express.Router();
 const jsonParser = bodyParser.json();
 
 router.post("/", jsonParser, (req, res) => {
@@ -22,7 +26,13 @@ router.post("/", jsonParser, (req, res) => {
         if(result.rows.length > 0) {
             res.send({message: "Username already exists!"});
         } else {
-            db.query(`INSERT INTO users (username, password) VALUES ($1, $2);`, [username, password]);
+            bcrypt.hash(password, saltRounds, (err, hash) => {
+                if(err) {
+                    console.log(err);
+                }
+
+                db.query(`INSERT INTO users (username, password) VALUES ($1, $2);`, [username, hash]);
+            })
             res.send({message: "User added."});
         }
     });

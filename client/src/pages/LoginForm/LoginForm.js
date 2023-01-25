@@ -32,6 +32,8 @@ const LoginForm = () => {
 
       if(res.value === false) {
         setLoginMessage(res.message);
+      } else {
+        alert("Welcome, " + res.user.username);
       }
     });
   }
