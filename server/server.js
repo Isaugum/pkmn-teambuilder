@@ -31,12 +31,10 @@ app.use(session({
 
 }))
 
-const searchRouter = require('./routes/search.js');
 const registerRouter = require('./routes/registerUser.js');
 const loginRouter = require('./routes/login.js');
 
 //ROUTES
-app.use("/search", searchRouter);
 app.use("/login", loginRouter);
 app.use("/register", registerRouter);
 

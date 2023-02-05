@@ -1,4 +1,5 @@
 import "./styles/app.css";
+import axios from "axios";
 import { useState, createContext, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import {
@@ -8,42 +9,15 @@ import {
 } from "./pages";
 
 export const LoginContext = createContext(null);
+export const DataContext = createContext(null);
 
 function App() {
-  const [displayValues, setDisplayValues] = useState([]);
-  const [displaySingle, setDisplaySingle] = useState(false);
-  const [clickedMon, setMon] = useState([]);
-  const [scrollPosition, setScrollPosition] = useState(0);
+
   const [userSession, setUserSession] = useState(false);
+  const [ pokemonList, setPokemonList ] = useState([]);
+  const [ loadingDatabase, setLoadingDatabase ] = useState(true);
 
-  const getSearchData = (result) => {
-    setDisplayValues(result);
-  };
-
-  const focusedMon = (pokemon) => {
-    setMon(pokemon);
-    setDisplaySingle(true);
-
-    setScrollPosition(window.pageYOffset);
-  };
-
-  const backButton = () => {
-    setDisplaySingle(false);
-    let location = scrollPosition;
-    console.log(location);
-  };
-
-  const capitalize = (data) => {
-    if (typeof data !== "object") {
-      const wordToList = data.split("");
-      const first = wordToList[0];
-      const higher = first.toUpperCase();
-      wordToList.splice(0, 1, higher);
-      data = wordToList.join("");
-
-      return data;
-    }
-  };
+  let counter = 0;
 
   useEffect(() => {
     fetch(`/login`, {
@@ -55,31 +29,71 @@ function App() {
     }).then(response => response.json())
     .then(response => {
       JSON.stringify(response);
-      console.log(response);
 
-      setUserSession(response.value);
+      setUserSession(response);
     })
+  }, []);
+
+  const fetchIndividualPokemon = async (url, index, pokemonCount) => {
+    const result = await axios({
+      method: "get",
+      url: `${url}`
+    })
+    .then(result => {
+      let pokeData = result.data;
+      setPokemonList(prevState => [
+        ...prevState,
+        pokeData
+      ]);
+    })
+  }
+
+  //1279 - all pokemon
+  const fetchPokemon = async (pokemon, checkcheck) => {
+
+    const result = await axios({
+      method: "get",
+      url: "https://pokeapi.co/api/v2/pokemon?limit=1279"
+    })
+    .then(result => {
+      pokemon = result.data.results;
+    }).then(
+      result => {
+        let index = 0;
+        const pokemonCount = pokemon.length;
+
+        pokemon.forEach(p => {
+          fetchIndividualPokemon(p.url, index, pokemonCount);
+          index++;
+        })
+      }
+    ).then(res => {
+      setLoadingDatabase(false);
+    });
+  }
+
+  //Fetch all pokemon
+  useEffect(() => {
+
+    if(counter != 1) {
+      let pokemon;
+      fetchPokemon(pokemon);
+      counter = 1;      
+    }
+
   }, []);
   
   return (
     <div className="main-screen">
       <LoginContext.Provider value={{userSession, setUserSession}}>
-      {/*
-      <Routes>
-        <Route path="/" element={!userSession ? <LoginForm /> : <MainMenu getData={getSearchData} data={displayValues} clickedMon={focusedMon} capitalize={capitalize}/>} />
-        <Route path="/single" element={<DisplaySingle goBack={backButton} mon={clickedMon} capitalize={capitalize} />} />
-      </Routes>
-      */}
-      {
-        userSession === false ? < LoginForm /> :
-        <>{displaySingle === false ?
+        <DataContext.Provider value={{pokemonList, setPokemonList, loadingDatabase, setUserSession}}>
           <>
-            <MainMenu getData={getSearchData} data={displayValues} clickedMon={focusedMon} capitalize={capitalize}/>
+          {/*
+            userSession === false ? < LoginForm /> : < MainMenu />
+          */}
+          < MainMenu />
           </>
-         : 
-          <DisplaySingle goBack={backButton} mon={clickedMon} capitalize={capitalize} />
-        }</>
-      }
+        </DataContext.Provider>
       </LoginContext.Provider>      
     </div>
 

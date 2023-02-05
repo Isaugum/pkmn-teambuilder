@@ -23,9 +23,4 @@ const initializeDatabase = () => {
 }
 
 
-const Datastore = require("nedb");
-
-const database = new Datastore("./database/pokemonDB.db");
-database.loadDatabase();
-
-module.exports = { database, db, initializeDatabase };
+module.exports = { db, initializeDatabase };

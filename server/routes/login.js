@@ -7,6 +7,7 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
 const jsonParser = bodyParser.json();
+
 router.get("/", jsonParser, (req, res) => {
     if(req.session.user) {
         res.send({ user: req.session.user, value: true });

@@ -1,53 +1,64 @@
-import './PkmnCardSmall.css';
+import style from './style/PkmnCardSmall.module.css';
 
-const PkmnCardSmall = (props) => {
+const PkmnCardSmall = ({pokemon, search}) => {
 
-    return (
+  let pokemonName = pokemon.name;
+  let pokemonTypes = pokemon.types.map(type => {
+    return type.type.name
+  });
 
-        <div className="mon-card" key={props.mon.id}
-            onClick={() => {
-              props.clickedMon(props.mon);
-            }}>
-            
-            <div className="mon-itself">
-              <img className="mon-image" src={props.mon.spriteFront} />
-            </div>
+  let pokemonAbilities = pokemon.abilities.map(ability => {
+    let theAbility = ability.ability.name
+    let newAbility = theAbility.replace("-", " ");
+    return newAbility;
+  });
 
-            <p className="mon-name">{`#${props.mon.id} - ${props.capitalize(props.mon.name)}`}</p>
+  let pokemonMoves = pokemon.moves.map(move => {
+    let theMove = move.move.name;
+    let newMove = theMove.replace("-", " ");
+    return newMove;
+  });
 
-            <div className="mon-typing">
-              <h5>TYPES</h5>
-              {props.mon.types.length === 1 ? (
-                <p className="mon-type-instance">{props.capitalize(props.mon.types[0])}</p>
-              ) : (
-                props.mon.types.map((value) => {
-                  let type = props.capitalize(value);
-                  return <p className="mon-type-instance">{type}</p>;
-                })
-              )}
-            </div>
+  let nameRegex = new RegExp(search.name, "i");
+  let type1Regex = new RegExp(search.type1, "i");
+  let type2Regex = new RegExp(search.type2, "i");
+  let abilityRegex = new RegExp(search.ability, "i");
+  let move1Regex = new RegExp(search.move1, "i");
+  let move2Regex = new RegExp(search.move2, "i");
+  let move3Regex = new RegExp(search.move3, "i");
+  let move4Regex = new RegExp(search.move4, "i");
 
-            <div className="mon-abilities">
-              <h5>ABILITIES</h5>
-              {props.mon.abilities.map((value) => {
-                let ability = props.capitalize(value);
-                return <p className="mon-ability-instance">{ability}</p>;
-              })}
-            </div>
+  let nameMatch = nameRegex.test(pokemonName) 
+      && type1Regex.test(pokemonTypes.filter(type => type)) 
+      && type2Regex.test(pokemonTypes.filter(type => type))
+      && abilityRegex.test(pokemonAbilities.filter(ability => ability))
+      && move1Regex.test(pokemonMoves.filter(move => move))
+      && move2Regex.test(pokemonMoves.filter(move => move))
+      && move3Regex.test(pokemonMoves.filter(move => move))
+      && move4Regex.test(pokemonMoves.filter(move => move));
 
-            <div className="mon-stats">
-              <p className="mon-stat-instance">HP: {props.mon.stats.hp}</p>
-              <p className="mon-stat-instance">Attack: {props.mon.stats.attack}</p>
-              <p className="mon-stat-instance">Defense: {props.mon.stats.defense}</p>
-              <p className="mon-stat-instance">
-                SP Attack: {props.mon.stats["special-attack"]}
-              </p>
-              <p className="mon-stat-instance">
-                SP Defense: {props.mon.stats["special-defense"]}
-              </p>
-              <p className="mon-stat-instance">Speed: {props.mon.stats.speed}</p>
-            </div>
-          </div>
+  return (
+    <>
+    <div className={nameMatch ? style.pkmnCard : style.hidden}>
+        <h3 className={style.pkmnName}>{pokemon.name.toUpperCase()}</h3>
+        <img className={style.pkmnSprite} src={pokemon.sprites.front_default} />
+        <div className={style.pkmnTypes}>
+          {pokemon.types.map(type => {
+          return <p className={style.typeInstance}>{type.type.name}</p>
+          })}              
+        </div>
+        <div className={style.pkmnAbilities}>
+          {pokemon.abilities.map(ability => {
+            return <p className={style.abilityInstance}>{ability.ability.name}</p>
+          })}
+        </div>
+        <div className={style.pkmnStats}>
+          {pokemon.stats.map(stat => {
+            return <p className={style.statInstance}>{stat.stat.name.toUpperCase()}: {stat.base_stat}</p>
+          })}
+        </div>
+    </div>
+    </>
     )
 }
 

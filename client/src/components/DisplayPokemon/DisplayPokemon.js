@@ -1,15 +1,10 @@
 import "./DisplayPokemon.css";
-import { PkmnCardSmall } from '../PkmnCardSmall';
 
-const DisplayPokemon = ({ data, clickedMon, capitalize }) => {
+const DisplayPokemon = () => {
 
   return (
-    
-    <div className="display-mons">
-      {data.map((mon) => {
-        return < PkmnCardSmall mon={mon} capitalize={capitalize} clickedMon={clickedMon}/>
-      })}
-    </div>
+    <>
+    </>
   );
 };
 
