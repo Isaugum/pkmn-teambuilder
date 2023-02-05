@@ -1,25 +1,19 @@
-import { useMemo } from 'react';
+import React, { useContext, useMemo } from 'react';
+import { RegexContext } from '../../pages';
 import style from './style/PkmnCardSmall.module.css';
 
-const PkmnCardSmall = ({pokemon, search}) => {
+const PkmnCardSmall = React.memo(({pokemon}) => {
 
-  let nameRegex = new RegExp(search.name, "i");
-  let type1Regex = new RegExp(search.type1, "i");
-  let type2Regex = new RegExp(search.type2, "i");
-  let abilityRegex = new RegExp(search.ability, "i");
-  let move1Regex = new RegExp(search.move1, "i");
-  let move2Regex = new RegExp(search.move2, "i");
-  let move3Regex = new RegExp(search.move3, "i");
-  let move4Regex = new RegExp(search.move4, "i");
+  const {nameRegex, type1Regex, type2Regex, abilityRegex, move1Regex, move2Regex, move3Regex, move4Regex} = useContext(RegexContext);
 
   let nameMatch = nameRegex.test(pokemon.name) 
-      && type1Regex.test(pokemon.types.map(type => type.type.name)) 
-      && type2Regex.test(pokemon.types.map(type => type.type.name))
-      && abilityRegex.test(pokemon.abilities.map(ability => ability.ability.name))
-      && move1Regex.test(pokemon.moves.map(move => move.move.name))
-      && move2Regex.test(pokemon.moves.map(move => move.move.name))
-      && move3Regex.test(pokemon.moves.map(move => move.move.name))
-      && move4Regex.test(pokemon.moves.map(move => move.move.name));
+      && type1Regex.test(pokemon.types.map(type => type))
+      && type2Regex.test(pokemon.types.map(type => type))
+      && abilityRegex.test(pokemon.abilities.map(ability => ability))
+      && move1Regex.test(pokemon.moves.map(move => move))
+      && move2Regex.test(pokemon.moves.map(move => move))
+      && move3Regex.test(pokemon.moves.map(move => move))
+      && move4Regex.test(pokemon.moves.map(move => move));
 
   return (
     <>
@@ -28,12 +22,12 @@ const PkmnCardSmall = ({pokemon, search}) => {
         <img className={style.pkmnSprite} src={pokemon.sprites.front_default} />
         <div className={style.pkmnTypes}>
           {pokemon.types.map(type => {
-          return <p className={style.typeInstance}>{type.type.name}</p>
+          return <p className={style.typeInstance}>{type}</p>
           })}              
         </div>
         <div className={style.pkmnAbilities}>
           {pokemon.abilities.map(ability => {
-            return <p className={style.abilityInstance}>{ability.ability.name}</p>
+            return <p className={style.abilityInstance}>{ability}</p>
           })}
         </div>
         <div className={style.pkmnStats}>
@@ -44,7 +38,7 @@ const PkmnCardSmall = ({pokemon, search}) => {
     </div>
     </>
     )
-}
+})
 
 
 export { PkmnCardSmall }

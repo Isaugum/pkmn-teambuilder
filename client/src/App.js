@@ -1,6 +1,6 @@
 import "./styles/app.css";
 import axios from "axios";
-import { useState, createContext, useEffect } from "react";
+import React, { useState, createContext, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import {
   MainMenu,
@@ -11,7 +11,7 @@ import {
 export const LoginContext = createContext(null);
 export const DataContext = createContext(null);
 
-function App() {
+const App = () => {
 
   const [userSession, setUserSession] = useState(false);
   const [ pokemonList, setPokemonList ] = useState([]);
@@ -41,9 +41,22 @@ function App() {
     })
     .then(result => {
       let pokeData = result.data;
+      let pokeTypes = result.data.types.map(type => type.type.name);
+      let pokeAbilities = result.data.abilities.map(ability => ability.ability.name);
+      let pokeMoves = result.data.moves.map(move => move.move.name);
+      let pokeSprites = result.data.sprites
+      let pokeStats = result.data.stats;
+      let pokemon = {
+        name: result.data.name,
+        types: pokeTypes,
+        abilities: pokeAbilities,
+        moves: pokeMoves,
+        sprites: pokeSprites,
+        stats: pokeStats
+      }
       setPokemonList(prevState => [
         ...prevState,
-        pokeData
+        pokemon
       ]);
     })
   }
@@ -74,7 +87,6 @@ function App() {
 
   //Fetch all pokemon
   useEffect(() => {
-
     if(counter != 1) {
       let pokemon;
       fetchPokemon(pokemon);
@@ -88,10 +100,9 @@ function App() {
       <LoginContext.Provider value={{userSession, setUserSession}}>
         <DataContext.Provider value={{pokemonList, setPokemonList, loadingDatabase, setUserSession}}>
           <>
-          {/*
+          {
             userSession === false ? < LoginForm /> : < MainMenu />
-          */}
-          < MainMenu />
+          }
           </>
         </DataContext.Provider>
       </LoginContext.Provider>      
