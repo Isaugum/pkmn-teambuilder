@@ -1,23 +1,7 @@
+import { useMemo } from 'react';
 import style from './style/PkmnCardSmall.module.css';
 
 const PkmnCardSmall = ({pokemon, search}) => {
-
-  let pokemonName = pokemon.name;
-  let pokemonTypes = pokemon.types.map(type => {
-    return type.type.name
-  });
-
-  let pokemonAbilities = pokemon.abilities.map(ability => {
-    let theAbility = ability.ability.name
-    let newAbility = theAbility.replace("-", " ");
-    return newAbility;
-  });
-
-  let pokemonMoves = pokemon.moves.map(move => {
-    let theMove = move.move.name;
-    let newMove = theMove.replace("-", " ");
-    return newMove;
-  });
 
   let nameRegex = new RegExp(search.name, "i");
   let type1Regex = new RegExp(search.type1, "i");
@@ -28,14 +12,14 @@ const PkmnCardSmall = ({pokemon, search}) => {
   let move3Regex = new RegExp(search.move3, "i");
   let move4Regex = new RegExp(search.move4, "i");
 
-  let nameMatch = nameRegex.test(pokemonName) 
-      && type1Regex.test(pokemonTypes.filter(type => type)) 
-      && type2Regex.test(pokemonTypes.filter(type => type))
-      && abilityRegex.test(pokemonAbilities.filter(ability => ability))
-      && move1Regex.test(pokemonMoves.filter(move => move))
-      && move2Regex.test(pokemonMoves.filter(move => move))
-      && move3Regex.test(pokemonMoves.filter(move => move))
-      && move4Regex.test(pokemonMoves.filter(move => move));
+  let nameMatch = nameRegex.test(pokemon.name) 
+      && type1Regex.test(pokemon.types.map(type => type.type.name)) 
+      && type2Regex.test(pokemon.types.map(type => type.type.name))
+      && abilityRegex.test(pokemon.abilities.map(ability => ability.ability.name))
+      && move1Regex.test(pokemon.moves.map(move => move.move.name))
+      && move2Regex.test(pokemon.moves.map(move => move.move.name))
+      && move3Regex.test(pokemon.moves.map(move => move.move.name))
+      && move4Regex.test(pokemon.moves.map(move => move.move.name));
 
   return (
     <>
