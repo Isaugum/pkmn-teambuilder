@@ -34,8 +34,8 @@ npm install react react-dom axios fetch express dotenv pg bycript nodemon
 - **"./routes/** folder contains the routes, currently for login and registration of users. Bcrypt is used to encrypt password data on registration and login. The user info itself is stored in a posgreSQL table, which is initialized in **./loadDatabase.js** file.
 
 ## Client
-- The entry point is **./src/index.js**, which for now just sets up a router, which is currently unused.
+- The entry point is **./src/index.js** - for now just sets up a router, which is currently unused.
 
-- **"./src/app.js"** file contains the rendering logic for pages - currently just the switch from login screen to main menu, which is disabled for development purposes. It also loads in all the pokemon data using axios requests to [pokeapi](https://pokeapi.co/), and a fetch request to login (get) that returns a user session is one is active.
+- **"./src/app.js"** file contains the rendering logic for pages - currently just the switch from login screen to main menu. It also loads in all the pokemon data using axios requests to [pokeapi](https://pokeapi.co/), and a fetch request to login (get) that returns a user session if one is active.
 
 - **"./src/pages/MainMenu"** currently contains almost all functionality. If the data is loaded, it displays pokemon using **PkmnCardSmall** component imported from **"./src/components/PkmnCardSmall** directory, sending the data of each pokemon as a prop. Main menu also has 8 possible input parameters. The displayed pokemon change in real time depending on queries these inputs receive, which are processed using RegExp inside PkmnCardSmall component. If RedExp returns false, the class of that specific card is set to .hidden -> its css display property is set to "none".
