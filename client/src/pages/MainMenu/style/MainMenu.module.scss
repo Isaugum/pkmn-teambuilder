@@ -1,5 +1,37 @@
+@mixin flexBox($direction, $justify, $align) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+.logoutBtn {
+    position: absolute;
+    top: 20px;
+    right: 50px;
+
+    height: 30px;
+    width: 70px;
+}
+
+.mainText {
+    @include flexBox(flex, center, center);
+    height: 400px;
+
+    font-size: 30px;
+}
+
+.queryInputs {
+    @include flexBox(flex, space-evenly, center);
+    width: 100%;
+
+    .queryInput {
+        width: 100px;
+    }
+}
+
 .cardContainer {
     width: 100%;
 
-    margin-top: 100px;
+    margin-top: 50px;
 }

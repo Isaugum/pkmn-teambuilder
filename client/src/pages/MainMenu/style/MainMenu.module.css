@@ -1,4 +1,32 @@
+.logoutBtn {
+  position: absolute;
+  top: 20px;
+  right: 50px;
+  height: 30px;
+  width: 70px;
+}
+
+.mainText {
+  display: flex;
+  flex-direction: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+  font-size: 30px;
+}
+
+.queryInputs {
+  display: flex;
+  flex-direction: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+}
+.queryInputs .queryInput {
+  width: 100px;
+}
+
 .cardContainer {
   width: 100%;
-  margin-top: 100px;
+  margin-top: 50px;
 }/*# sourceMappingURL=MainMenu.module.css.map */

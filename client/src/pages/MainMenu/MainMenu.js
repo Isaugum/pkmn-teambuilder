@@ -35,28 +35,30 @@ const MainMenu = React.memo(({props}) => {
     })        
   }, [pokemonList]);
 
-  useEffect(() => {
-    console.log("Well helloo.");
-  })
-
-
   return (
     <> 
-      { loadingDatabase ? <h1>LOADING...</h1> : <h1>READY.</h1>}
-      <button onClick={() => setUserSession(false)}>LOGOUT</button>
-      <input type="text" placeholder="pokemon" id="name" onChange={e => {e.preventDefault(); setNameQuery(e.target.value)}} />
-      <input type="text" placeholder="type 1" id="type1" onChange={e => {e.preventDefault(); setType1Query(e.target.value)}} />
-      <input type="text" placeholder="type 2" id="type2" onChange={e => {e.preventDefault(); setType2Query(e.target.value)}} />
-      <input type="text" placeholder="ability" id="ability" onChange={e => {e.preventDefault(); setAbilityQuery(e.target.value)}} />
-      <input type="text" placeholder="move 1" id="move1" onChange={e => {e.preventDefault(); setMove1Query(e.target.value)}} />
-      <input type="text" placeholder="move 2" id="move2" onChange={e => {e.preventDefault(); setMove2Query(e.target.value)}} />
-      <input type="text" placeholder="move 3" id="move3" onChange={e => {e.preventDefault(); setMove3Query(e.target.value)}} />
-      <input type="text" placeholder="move 4" id="move4" onChange={e => {e.preventDefault(); setMove4Query(e.target.value)}} />
+      { loadingDatabase ? <h1>LOADING...</h1> : 
+      <>
+      <button className={style.logoutBtn} onClick={() => setUserSession(false)}>LOGOUT</button>
+      <div className={style.mainText}>
+        WELCOME TO PKMN TEAMBUILDER
+      </div>
+      <div className={style.queryInputs}>
+        <input className={style.queryInput} type="text" placeholder="type 1" id="type1" onChange={e => {e.preventDefault(); setTimeout(() => {setType1Query(e.target.value)}, 200);}} />
+        <input className={style.queryInput} type="text" placeholder="type 2" id="type2" onChange={e => {e.preventDefault(); setTimeout(() => {setType2Query(e.target.value)}, 200);}} />
+        <input className={style.queryInput} type="text" placeholder="ability" id="ability" onChange={e => {e.preventDefault(); setTimeout(() => {setAbilityQuery(e.target.value)}, 200);}} />
+        <input className={style.queryInput} type="text" placeholder="move 1" id="move1" onChange={e => {e.preventDefault(); setTimeout(() => {setMove1Query(e.target.value)}, 200);}} />
+        <input className={style.queryInput} type="text" placeholder="move 2" id="move2" onChange={e => {e.preventDefault(); setTimeout(() => {setMove2Query(e.target.value)}, 200);}} />
+        <input className={style.queryInput} type="text" placeholder="move 3" id="move3" onChange={e => {e.preventDefault(); setTimeout(() => {setMove3Query(e.target.value)}, 200);}} />
+        <input className={style.queryInput} type="text" placeholder="move 4" id="move4" onChange={e => {e.preventDefault(); setTimeout(() => {setMove4Query(e.target.value)}, 200);}} />
+      </div>
       <RegexContext.Provider value={{nameRegex, type1Regex, type2Regex, abilityRegex, move1Regex, move2Regex, move3Regex, move4Regex}} >
         <div className={style.cardContainer}>
         { !loadingDatabase && pokeMemo }
         </div>
       </RegexContext.Provider>
+      </>
+      }
     </>
   );
 });

@@ -19,21 +19,6 @@ const App = () => {
 
   let counter = 0;
 
-  useEffect(() => {
-    fetch(`/login`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      }
-    }).then(response => response.json())
-    .then(response => {
-      JSON.stringify(response);
-
-      setUserSession(response);
-    })
-  }, []);
-
   const fetchIndividualPokemon = async (url, index, pokemonCount) => {
     const result = await axios({
       method: "get",
@@ -42,8 +27,16 @@ const App = () => {
     .then(result => {
       let pokeData = result.data;
       let pokeTypes = result.data.types.map(type => type.type.name);
-      let pokeAbilities = result.data.abilities.map(ability => ability.ability.name);
-      let pokeMoves = result.data.moves.map(move => move.move.name);
+      let pokeAbilities = result.data.abilities.map(ability => {
+        let someAbility = ability.ability.name;
+        let newAbility = someAbility.replace("-", " ");
+        return newAbility;
+      });
+      let pokeMoves = result.data.moves.map(move => {
+        let someMove = move.move.name;
+        let newMove = someMove.replace("-", " ");
+        return newMove;
+      });
       let pokeSprites = result.data.sprites
       let pokeStats = result.data.stats;
       let pokemon = {
@@ -87,10 +80,23 @@ const App = () => {
 
   //Fetch all pokemon
   useEffect(() => {
+    fetch(`/login`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      }
+    }).then(response => response.json())
+    .then(response => {
+      JSON.stringify(response);
+
+      setUserSession(response);
+    })
+
     if(counter != 1) {
       let pokemon;
       fetchPokemon(pokemon);
-      counter = 1;      
+      counter = 1;
     }
 
   }, []);
@@ -101,6 +107,7 @@ const App = () => {
         <DataContext.Provider value={{pokemonList, setPokemonList, loadingDatabase, setUserSession}}>
           <>
           {
+            loadingDatabase ? <h1>LOADING...</h1> :
             userSession === false ? < LoginForm /> : < MainMenu />
           }
           </>
