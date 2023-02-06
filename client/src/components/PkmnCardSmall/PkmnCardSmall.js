@@ -15,9 +15,13 @@ const PkmnCardSmall = React.memo(({pokemon}) => {
       && move3Regex.test(pokemon.moves.map(move => move))
       && move4Regex.test(pokemon.moves.map(move => move));
 
+  const handleCardClick = (pokemon) => {
+      console.log(pokemon);
+  }
+
   return (
     <>
-    <div className={nameMatch ? style.pkmnCard : style.hidden}>
+    <div className={nameMatch ? style.pkmnCard : style.hidden} onClick={() => handleCardClick(pokemon.name)}>
         <h3 className={style.pkmnName}>{pokemon.name.toUpperCase()}</h3>
         <img className={style.pkmnSprite} src={pokemon.sprites.front_default} />
         <div className={style.pkmnTypes}>

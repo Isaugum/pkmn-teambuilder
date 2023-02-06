@@ -36,7 +36,8 @@ const MainMenu = React.memo(({props}) => {
   }, [pokemonList]);
 
   return (
-    <> 
+    <>
+    <div className={style.container}>
       { loadingDatabase ? <h1>LOADING...</h1> : 
       <>
       <button className={style.logoutBtn} onClick={() => setUserSession(false)}>LOGOUT</button>
@@ -59,6 +60,7 @@ const MainMenu = React.memo(({props}) => {
       </RegexContext.Provider>
       </>
       }
+      </div> 
     </>
   );
 });

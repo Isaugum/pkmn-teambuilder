@@ -5,6 +5,10 @@
     align-items: $align;
 }
 
+.container {
+    width: 100%;
+}
+
 .logoutBtn {
     position: absolute;
     top: 20px;
@@ -31,7 +35,7 @@
 }
 
 .cardContainer {
-    width: 100%;
+    width: 99.7%;
 
     margin-top: 50px;
 }

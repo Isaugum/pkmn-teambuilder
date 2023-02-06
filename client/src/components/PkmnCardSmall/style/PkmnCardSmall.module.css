@@ -13,6 +13,7 @@
   font-size: 13px;
   border: solid rgba(200, 200, 200, 0.8);
   background-color: rgba(200, 200, 200, 0.3);
+  transition: 300ms;
 }
 .pkmnCard .pkmnName {
   width: 12%;
@@ -35,4 +36,8 @@
   justify-content: space-between;
   align-items: center;
   width: 40%;
+}
+.pkmnCard:hover {
+  cursor: pointer;
+  height: 130px;
 }/*# sourceMappingURL=PkmnCardSmall.module.css.map */
