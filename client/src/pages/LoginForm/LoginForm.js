@@ -1,4 +1,5 @@
 import "./LoginForm.css";
+import swal from "sweetalert";
 import { useState, useContext } from "react";
 import { LoginContext } from "../../App.js"; 
 
@@ -33,7 +34,7 @@ const LoginForm = () => {
       if(res.value === false) {
         setLoginMessage(res.message);
       } else {
-        alert("Welcome, " + res.user.username);
+        swal("Welcome, " + res.user.username);
       }
     });
   }
