@@ -4,6 +4,8 @@ This is a fun project built using ReactJS, NodeJS and PostgreSQL.
 It is meant to make it easier to get creative and search for pokemon to include in competitive teams.
 The plan is to also make user accounts that will allow creation and storage of teams.
 
+### The main branch contains the newest version of the project. An older version is contained inside the master branch.
+
 ## Dependencies and installation
 
 Use Node Package Manager [npm](https://www.npmjs.com/) to install dependencies.
