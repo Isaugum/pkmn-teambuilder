@@ -1,4 +1,5 @@
 import "../../index.css"
+import InfiniteScroll from "react-infinite-scroller";
 
 import React, { useContext, useState, useMemo, useEffect } from "react";
 import { DataContext } from "../../App";
@@ -34,6 +35,30 @@ const MainMenu = React.memo(({props}) => {
     })        
   }, [pokemonList]);
 
+  const itemsPerPage = 10;
+  const [hasMore, setHasMore] = useState(true);
+  const [records, setrecords] = useState(itemsPerPage);
+
+  const pokemonToShow = (pokeMemo) => {
+    var items = [];
+    for (let i = 0; i < records; i++) {
+      items.push(
+        pokeMemo[i]
+      );
+    }
+    return items;
+  };
+
+  const loadMore = () => {
+    if (records === pokeMemo.length) {
+      setHasMore(false);
+    } else {
+      setTimeout(() => {
+        setrecords(records + itemsPerPage);
+      }, 1000);
+    }
+  };
+
   return (
     <>
     <div className="bg-blue-100" >
@@ -54,7 +79,15 @@ const MainMenu = React.memo(({props}) => {
       </div>
       <RegexContext.Provider value={{type1Regex, type2Regex, abilityRegex, move1Regex, move2Regex, move3Regex, move4Regex}} >
         <div className="mt-10" >
-        { !loadingDatabase && pokeMemo }
+          <InfiniteScroll
+          pageStart={0}
+          loadMore={loadMore}
+          hasMore={hasMore}
+          loader={<h3>Loading...</h3>}
+          useWindow={false}
+          >
+            {pokemonToShow(pokeMemo)}
+          </InfiniteScroll>
         </div>
       </RegexContext.Provider>
       </>
