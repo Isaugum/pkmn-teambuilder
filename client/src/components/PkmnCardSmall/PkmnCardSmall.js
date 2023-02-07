@@ -30,7 +30,7 @@ const PkmnCardSmall = React.memo(({pokemon}) => {
     <>
     <div className={`${visible} w-auto h-20 flex flex-row justify-evenly items-center bg-gray-200 border-2 border-solid border-gray-300 my-1 cursor-pointer hover:h-24 duration-200`} onClick={() => handleCardClick(pokemon.name)}>
         <h3 className="text-sm">{pokemon.name.toUpperCase()}</h3>
-        <img className="" src={pokemon.sprites.front_default} />
+        <img className="h-20" src={pokemon.sprites.front_default} />
         <div className="text-xs">
           {pokemon.types.map(type => {
           return <p className="">{type}</p>
