@@ -1,4 +1,4 @@
-import "./LoginForm.css";
+
 import swal from "sweetalert";
 import { useState, useContext } from "react";
 import { LoginContext } from "../../App.js"; 
@@ -62,31 +62,31 @@ const LoginForm = () => {
 
   return (
     <>
-      <div className="inputs-group">
+      <div className="bg-blue-100 h-screen w-auto flex flex-col justify-center items-center">
           <input
-            className="input-field"
+            className="h-10 w-64 border-2 border-solid border-gray-400"
             type="text"
             name="username"
             placeholder="Username"
             onChange={e => setUsername(e.target.value)}
           />
           <input
-            className="input-field"
+            className="h-10 w-64 border-2 border-solid border-gray-400 mt-2"
             type="text"
             name="password"
             placeholder="Password"
             onChange={e => setPassword(e.target.value)}
           />
 
-      <button className="submit-btn" onClick={handleLogin}>
+      <button className="w-40 bg-gray-200 border-2 border-solid border-gray-400  py-2 px-5 mb-2 mt-10" onClick={handleLogin}>
         Login
       </button>
 
-      <button className="submit-btn" onClick={handleRegister}>
+      <button className="w-40 bg-gray-200 border-2 border-solid border-gray-400  py-2 px-5" onClick={handleRegister}>
         Register
       </button>
 
-      <h4 className="login-msg">{loginMessage}</h4>
+      <h4 className="mt-24 text-red-600 text-bold">{loginMessage}</h4>
       </div>
     </>
   );

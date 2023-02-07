@@ -1,4 +1,4 @@
-import "./styles/app.css";
+
 import axios from "axios";
 import React, { useState, createContext, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
@@ -102,7 +102,7 @@ const App = () => {
   }, []);
   
   return (
-    <div className="main-screen">
+    <div className="">
       <LoginContext.Provider value={{userSession, setUserSession}}>
         <DataContext.Provider value={{pokemonList, setPokemonList, loadingDatabase, setUserSession}}>
           <>
